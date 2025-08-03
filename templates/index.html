@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h1>User Recommendations</h1>
+        {% for user in users %}
+        <div class="user-card">
+            <h2>{{ user.name }} (ID: {{ user.id }})</h2>
+            <p><strong>Friends:</strong> {{ user.friends | join(", ") if user.friends else "No friends" }}</p>
+            <p><strong>Liked Pages:</strong> {{ user.pages | join(", ") if user.pages else "No pages liked" }}</p>
+            <p><strong>Friend Suggestions:</strong> {{ recommendations[user.id].friends | join(", ") if recommendations[user.id].friends else "None" }}</p>
+            <p><strong>Page Suggestions:</strong> {{ recommendations[user.id].pages | join(", ") if recommendations[user.id].pages else "None" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
